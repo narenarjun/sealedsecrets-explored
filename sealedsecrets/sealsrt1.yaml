@@ -1,0 +1,15 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: avengers
+  namespace: play1
+spec:
+  encryptedData:
+    strongest: AgA8dHOzqEtaepgei19m3ENVKLSzjJ6r1xdmYrsc+hTl7tYK0C9k/TRivTOPecwEyPZz2yQdRV8pWaKLIbaave6hAo5D6XosiQK+WiI7tWmYtBcOwDQKzonlrmnRYz0KByAJc7kMXagLpAqNwmnjyrBBhZU3qgVheA451vay5Xz0H9BRXAfp7YHNLZkU8uZr2NVwztvdKrLWjrLsRii63zQW0y4VmThRsj5eyttTX+s2/b27oKS1ZvcgYyloILB8zL3KYUi4sUdQRmwEGq4EZM8HqkaA85o0g7w/VZjjZY60mQXoyZ+MMFLZhiEBTWlW/0g8jZaaXm2KvWEgfRd5cOn0NsrEbVvsUnIvLzZilOrxuTohWZl6m5WfZZ4Z7HV8nGnKQDZD/YrnJrZyRQiH4FC85WUnOBh6n0X6L/fH/6waJqyhl4TWfavhBbnti9k61bouDRL2s/DeVEEOo/bZJfBIquI7CE7bvVD5n1EK75Rp57cp3sB3BNh0YWmPy7UOo2fCKBHyWy8CMjojNvUEpVmyQSl+hbNs0aV12cBw5VYWTzoQeICheeuktBeT8cRNOQcat5mIFUEng2c8iZee9mC18D7eyjjtDjptx8aFJ0iJdEbl+UGzRj4HOjbYxiAOEIrtynnDd4MiNSM2yVhVx43kdlYpxtStUeh2PlimmSbob+7J6G2Pa3mPbO+mOWN1EIiEdj15J0KQY9wnsxAO40snnA4dWxG2ICXSb0GiNw==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: avengers
+      namespace: play1
+
