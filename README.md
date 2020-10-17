@@ -184,3 +184,75 @@ Let's print the secret value:
 >>$ kubectl exec -it busybox -- cat /tmp/avengersecret/strongest
 The strongest Avanger is Hulk
 ```
+
+### Modifying Namespace or SecretName
+
+Since we created the `avengers` secret in strict mode , if we modifiy the `namespace` or the `secretname` and apply it to the cluster , the operator will not convert it into secret in the cluster because it was `strict` scoped.
+
+### Creating Cluster-Wide `SealedSecrets`
+
+Let’s create a Secret without specifying the namespace.
+
+```bash
+ kubectl create secret generic dragonball --dry-run=client --from-literal=goku="True super saiyan" -o yaml > dbzsecret.yaml
+```
+
+Seal the Secret using the cluster-wide scope,
+
+```bash
+$ kubeseal --format yaml --scope cluster-wide <dbzsecret.yaml >dbzsealedsecret.yaml
+```
+
+and apply it to the `play1` namespace.
+
+```bash
+$ kubectl apply -n play1 -f ./sealedsecrets/dbzsealedsecret.yaml
+```
+
+Let’s see if the Secret is created.
+
+```bash
+kubectl get secret -n play1 dragonball
+NAME         TYPE     DATA   AGE
+dragonball   Opaque   1      22s
+
+```
+
+Now let’s rename the Secret, and apply it to the `play1` namespace.
+
+```bash
+>>$ cp -a dbzsealedsecret.yaml saiyansecret.yaml
+```
+
+```bash
+>>$ sed -i 's/dragonball/saiyan/g' saiyansecret.yaml
+```
+
+```bash
+>>$ kubectl apply -f saiyansecret.yaml -n play1
+sealedsecret.bitnami.com/saiyan created
+```
+
+When we get the Secret, we see that it’s available.
+
+```bash
+kubectl get secret saiyan -n play1
+NAME     TYPE     DATA   AGE
+saiyan   Opaque   1      64s
+```
+
+What about modifying the namespace? Let’s apply the sealed Secret on the database namespace.
+
+```bash
+>>$ kubectl apply -f saiyansecret.yaml -n play2
+sealedsecret.bitnami.com/saiyan created
+```
+
+When we get the Secret, we see that it’s present as well.
+
+```bash
+kubectl get secret saiyan -n play2
+NAME     TYPE     DATA   AGE
+saiyan   Opaque   1      7s
+```
+# ⭐🎉🎉🎉`SealedSecrets` is the `Gitops` way of managing secrets and it's never been eaiser than now. 
