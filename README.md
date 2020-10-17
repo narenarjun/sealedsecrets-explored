@@ -161,3 +161,26 @@ $>> kubectl get secret
 NAME        TYPE         DATA    AGE
 avengers    Opaque        1      92s
 ```
+
+### Let's consume the secret:
+
+Apply the pod to the cluster.
+
+```bash
+ kubectl apply -f ./k8s/pods/superpod.yaml
+```
+
+get the pod:
+
+```bash
+>>$ kubectl get pods
+NAME      READY   STATUS    RESTARTS   AGE
+busybox   1/1     Running   0          6s
+```
+
+Let's print the secret value:
+
+```bash
+>>$ kubectl exec -it busybox -- cat /tmp/avengersecret/strongest
+The strongest Avanger is Hulk
+```
